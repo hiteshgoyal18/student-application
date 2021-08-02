@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Bootstrap basic table example</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    
+<div class="container">
+    <h2>Enrollment APP</h2>
+    <div class="row">
+        <div class="col-md-12">
+            <button class="btn btn-primary pull-right">New Student</button>
+        </div></div>
+        <div style="height: 30px;"></div>
+    
+    
+        <div class="row">
+            <div class="col-md-12">
+<table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>Student Name</th>
+        <th>Email</th>
+        <th>Phone #</th>
+        <th>Class</th>
+        <th>Marks %</th>
+        <th>Edit</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for student in students %}
+        <tr>
+          <td>{{ student.name }}</td>
+          <td>{{ student.email }}</td>
+          <td>{{ student.mobile_number }}</td>
+          <td>{{ student.class_opt }}</td>
+          <td>{{ student.marks }}</td>
+          <td> <button> Edit </button></td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  </div></div>
+  {% if students.has_other_pages %}
+    <ul class="pagination">
+      {% if students.has_previous %}
+        <li><a href="?page={{ students.previous_page_number }}">&laquo;</a></li>
+      {% else %}
+        <li class="disabled"><span>&laquo;</span></li>
+      {% endif %}
+      {% for i in students.paginator.page_range %}
+        {% if students.number == i %}
+          <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+        {% else %}
+          <li><a href="?page={{ i }}">{{ i }}</a></li>
+        {% endif %}
+      {% endfor %}
+      {% if students.has_next %}
+        <li><a href="?page={{ students.next_page_number }}">&raquo;</a></li>
+      {% else %}
+        <li class="disabled"><span>&raquo;</span></li>
+      {% endif %}
+    </ul>
+  {% endif %}
+
+</div><br /><br />
+
+</body>
+</html>
