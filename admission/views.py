@@ -1,6 +1,10 @@
 from .models import Student
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.shortcuts import render
+from django.shortcuts import render, redirect, reverse
+from django.http import request, HttpResponseRedirect
+from .forms import StudentForm
+from django.views.generic import CreateView, UpdateView
+
 
 def index(request):
     student_list = Student.objects.all()
@@ -17,5 +21,16 @@ def index(request):
     return render(request, 'list.html', { 'students': students })
 
 
-def enroll_student(request):
-    pass
+class StudentCreateView(CreateView):
+    model = Student
+    fields = "__all__"
+    template_name = 'student_form.html'
+    def get_success_url(self):
+        return HttpResponseRedirect(reverse('student'))
+
+class StudentUpdateView(UpdateView):
+    model = Student
+    form_class = StudentForm
+    template_name = 'student_form.html'
+    def get_success_url(self):
+        return reverse(index)

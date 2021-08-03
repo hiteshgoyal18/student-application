@@ -12,7 +12,7 @@
     <h2>Enrollment APP</h2>
     <div class="row">
         <div class="col-md-12">
-            <button class="btn btn-primary pull-right">New Student</button>
+            <a href="/student/add"><button class="btn btn-primary pull-right">New Student</button></a>
         </div></div>
         <div style="height: 30px;"></div>
     
@@ -38,7 +38,7 @@
           <td>{{ student.mobile_number }}</td>
           <td>{{ student.class_opt }}</td>
           <td>{{ student.marks }}</td>
-          <td> <button> Edit </button></td>
+          <td>  <a href="/student/{{ student.id }}/update"><button class="btn btn-primary"> Edit </button></a></td>
         </tr>
       {% endfor %}
     </tbody>
